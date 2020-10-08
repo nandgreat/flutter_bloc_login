@@ -1,8 +1,42 @@
+import 'package:bloc_login/dao/user_dao.dart';
+import 'package:bloc_login/model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_login/bloc/authentication_bloc.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  Map<String, dynamic> user;
+  var ss;
+  UserDao userDao = UserDao();
+
+  String username;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    username = "";
+    getUser();
+
+  }
+
+  getUser() async{
+    user = await userDao.getUser("nandom");
+    print("_________________________________________________________");
+    print(user);
+
+    setState(() {
+      username = user["Fullname"];
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +50,7 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             Padding(padding: EdgeInsets.only(left: 30.0),
             child: Text(
-              'Welcome',
+              "Welcome $username",
               style: TextStyle(
                 fontSize: 24.0,
               ),

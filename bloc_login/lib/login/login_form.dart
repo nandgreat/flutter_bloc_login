@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_login/login/bloc/login_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoginForm extends StatefulWidget {
   @override
   State<LoginForm> createState() => _LoginFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _LoginFormState extends State<LoginForm> with TickerProviderStateMixin {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -74,9 +75,17 @@ class _LoginFormState extends State<LoginForm> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 30.0,),
                     Container(
+                      height: 50.0,
+                      width: MediaQuery.of(context).size.width,
                       child: state is LoginLoading
-                          ? CircularProgressIndicator()
+                          ? SpinKitRing(
+                              color: Colors.white,
+                              size: 50.0,
+                              controller: AnimationController(
+                                  vsync: this,
+                                  duration: const Duration(milliseconds: 1200)))
                           : null,
                     ),
                   ],

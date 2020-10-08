@@ -47,7 +47,7 @@ class AuthenticationBloc
     if (event is LoggedOut) {
       yield AuthenticationLoading();
 
-      await userRepository.delteToken(id: 0);
+      await userRepository.delteToken(id: "nandom");
 
       yield AuthenticationUnauthenticated();
     }

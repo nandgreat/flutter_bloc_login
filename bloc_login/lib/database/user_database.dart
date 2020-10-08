@@ -26,7 +26,7 @@ class DatabaseProvider {
 
     var database = await openDatabase(
       path,
-      version: 1,
+      version: 3,
       onCreate: initDB,
       onUpgrade: onUpgrade,
     );
@@ -44,9 +44,14 @@ class DatabaseProvider {
   void initDB(Database database, int version) async {
     await database.execute(
       "CREATE TABLE $userTable ("
-      "id INTEGER PRIMARY KEY, "
-      "username TEXT, "
-      "token TEXT "
+      "Fullname TEXT, "
+      "email TEXT, "
+      "phone TEXT, "
+      "country TEXT, "
+      "state TEXT, "
+      "username TEXT PRIMARY KEY, "
+      "dob TEXT, "
+      "createdAt TEXT "
       ")"
     );
   }
